@@ -1,10 +1,14 @@
-
+import { Home } from "./pages/home"
+import { SignIn } from "./pages/Signin"
+import { SignUp } from "./pages/Signup"
 
 function App() {
 
   return (
-   <div className="bg-red-400">
-    hii satish
+   <div>
+    {/* <SignIn /> */}
+   {/* <Home /> */}
+   <SignUp />
    </div>
   )
 }
