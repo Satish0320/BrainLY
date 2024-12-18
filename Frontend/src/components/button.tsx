@@ -4,7 +4,7 @@ import { ReactElement } from "react"
 interface Ibutton {
     variants: "primary" | "secondary",
     text: string,
-    startIcon: ReactElement,
+    startIcon?: ReactElement,
     onClick? : () => void
 }
 
