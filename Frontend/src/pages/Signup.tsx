@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRef } from "react"
 import { BACKEND_URL } from "../config";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
 
