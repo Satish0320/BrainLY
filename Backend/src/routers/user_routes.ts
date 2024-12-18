@@ -10,7 +10,7 @@ const JWT_Secret = "satish0123"
 const UserRouter = express.Router();
 
 
-UserRouter.post("/signup",async (req,res)=>{
+UserRouter.post("/Signup",async (req,res)=>{
     
     const reqbody = z.object({
         username: z.string(),
@@ -42,7 +42,7 @@ UserRouter.post("/signup",async (req,res)=>{
 })
 
 
-UserRouter.post("/signin", async (req,res)=>{
+UserRouter.post("/Signin", async (req,res)=>{
 
     const reqbody = z.object({
         username: z.string(),

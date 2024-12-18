@@ -1,9 +1,30 @@
+import axios from "axios";
 import { useRef } from "react"
+import { BACKEND_URL } from "../config";
+import { data, useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
 
   const usernameRef = useRef <HTMLInputElement | null> (null);
   const passwordRef = useRef <HTMLInputElement | null> (null);
+  const navigate = useNavigate()
+
+  async function signup(){
+    const username = usernameRef.current?.value;
+    const password = passwordRef.current?.value;
+
+      const response = await axios.post(`${BACKEND_URL}/Signup`, {
+         
+          username,
+          password
+        
+      })
+      navigate("/Signin")
+      console.log(response.data);
+      
+      // alert("You are ready to sigin")
+
+  }
 
   return (
 
@@ -38,6 +59,7 @@ export const SignUp = () => {
           </div>
 
           <button
+          onClick={signup}
             type="submit"
             className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
           >

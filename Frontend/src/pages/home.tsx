@@ -5,11 +5,15 @@ import { CreateModel } from "../components/createModel"
 import { Plusicon } from "../icons/Plusicons"
 import { Shareicon } from "../icons/shareicons"
 import { Sidebar } from "../components/sidebar"
+import { UseContent } from "../Hooks/useContent"
+import axios from "axios"
+import { BACKEND_URL } from "../config"
 
 
 
 export function Home() {
 const [model, setModel] = useState(false)
+const contents = UseContent();
   return (
 
    <div>
@@ -22,14 +26,22 @@ const [model, setModel] = useState(false)
 
     <div className="flex justify-end">
     <Button onClick= {()=>{setModel(true)}} variants="primary" text="Add Content" startIcon={<Plusicon />}/>
-    <Button variants="secondary" text="Share" startIcon={ <Shareicon /> }/>
+    <Button onClick={async ()=>{
+      const response = await axios.post(`${BACKEND_URL}brain/share`,{
+        share : true
+      },{
+        headers: {
+          "Authorization": localStorage.getItem("Token")
+        }
+      });
+      const url = `http://localhost:4000/user/brain/share/${response.data.Hash}`;
+      alert(url)
+    }} variants="secondary" text="Share" startIcon={ <Shareicon /> }/>
     </div>
     
-    <div className="flex space-x-4 pt-4 pl-4">
-    <Card type = "twitter"  link="https://x.com/DGukesh/status/1868748670461788667/photo/1"
-     title="tweet Gukesh"/>
-    <Card type = "youtube"  link="https://www.youtube.com/watch?v=w7kRA6F9QCk" 
-    title="Vlog Gukesh"/>
+    <div className="flex flex-wrap space-x-4 pt-4 pl-4" >
+
+    {contents.map(({type, title, link})=><Card type = {type}  link={link} title={title}/>)}
     </div>
     </div>
    </div>
