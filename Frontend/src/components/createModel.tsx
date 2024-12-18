@@ -3,17 +3,17 @@ import { Crossicon } from "../icons/crossicons";
 import { Button } from "./button";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
-import React, { forwardRef } from "react";
+import React from "react";
 
 enum contenttype {
     Youtube = "youtube",
     Twitter = "twitter"
 }
 
-export function CreateModel({ open, onClose }) {
+export function CreateModel({ open, onClose }: any) {
 
-    const titleref = useRef<HTMLInputElement | null>();
-    const linkref = useRef<HTMLInputElement | null>();
+    const titleref = useRef<HTMLInputElement | null>(null);
+    const linkref = useRef<HTMLInputElement | null>(null);
     const [type, setType] = useState(contenttype.Youtube)
 
 
@@ -21,7 +21,7 @@ export function CreateModel({ open, onClose }) {
         const title = titleref.current?.value;
         const link = linkref.current?.value;
 
-        const response = await axios.post(`${BACKEND_URL}/content`, {
+         await axios.post(`${BACKEND_URL}/content`, {
             title,
             link,
             type
@@ -29,6 +29,7 @@ export function CreateModel({ open, onClose }) {
             headers:{
                 "authorization": localStorage.getItem("Token")
             }
+            
         })
 
         onClose()
